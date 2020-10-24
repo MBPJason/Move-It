@@ -9,19 +9,15 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-
 app.use(require("./controllers/WorkoutController"));
 app.use(require("./controllers/HtmlController"));
 
-mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/workout",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-  }
-);
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+});
 
 const connection = mongoose.connection;
 
@@ -33,8 +29,6 @@ connection.on("error", (err) => {
   console.log("Mongoose connection error: ", err);
 });
 
-
-
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-  });
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
